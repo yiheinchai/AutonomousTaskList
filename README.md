@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AutonomousTaskList
 
-## Getting Started
+## Insipiration
 
-First, run the development server:
+- This is a side project of the AutonomousLLM project.
+- This aims to provide a backend first GPT-powered task generation app. It was noticed when building AutonomousLLM that it had difficulty handling tasks and breaking them down into smaller tasks before attempting them.
+- This project provides an API for AutonomousLLM to manage its tasks.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## User experience
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- The user first starts with a complex task that it wants to complete.
+- Then the user can use the 'auto' function to automatically generate subtasks.
+- The user can repeat this process until the subtasks are deemed to be simple enough
+- The user can then click 'execute' for GPT to execute the subtasks, such whatever tools the agent has.
+- A evaluation is used to determine if the subtask is completed successfully and if so, it marks the subtask as completed.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Looking forward
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Just like how humans can use this task management tool, it also provides a platform for AutonomousLLM or other AI agents to use it.
+- This tool will be mainly backend API focused given that the user can vary from humans, to many different types of AI agents, a seperate client can be created for each of those users.
+- As I am a human, I am prioritising building a web-based client and a VisonOS based client.
 
-## Learn More
+# Real world to-do list
 
-To learn more about Next.js, take a look at the following resources:
+## Inspiration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Another inspiration is to bulid a real-world to-do-list. In the real world, no one has time to type everything out slowly and manually to a to-do list.
+- The world is fast-paced, in your minds we create a virtual todo list from internal thoughts and spontaneous conversation with others.
+- Most of the time, we do not actually have time to write everything down, we just keep working memory of tasks that we need to do.
+- A real world to do list is able to list and see the things around us and determine action items to be completed, and if required break down those action items to smaller tasks.
+- If possible, this real world to do list should execute those action autonomously with permission from the user.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## User experience
 
-## Deploy on Vercel
+- The user goes about the day in the work environment with different conversations with co-workers.
+- The transcript is parsed by GPT to generate hierarchied actionable items.
+- Complex items are autonomatically broken down into smaller tasks.
+- An agent (AutonomousLLM) can be hired to complete the tasks and it prompts the user if it wants the agent to complete the task for the user (with price $ of API call).
+- Evaluation of success of task completion is conducted.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Looking forward
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Looking forward, the agent that is hired to complete the task can come in any form, primarily physical agents can help to accomplish more household required tasks.
+- The goal of this app is to create an unified API platform in which different agents are able to interface with the to-do-list.
+- I expect there will be a big market for evaluators too, large systems designed to evaludate the success of autonomously completed tasks.
