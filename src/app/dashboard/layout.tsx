@@ -2,9 +2,9 @@ import Sidebar from "./components/Sidebar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <section className="flex">
+    <section className="w-full h-full relative flex z-0">
       <Sidebar />
-      <div className="flex-1 ml-50">{children}</div>
+      <div className="w-full h-screen overflow-y-auto">{children}</div>
     </section>
   );
 }
