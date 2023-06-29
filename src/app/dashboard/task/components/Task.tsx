@@ -54,17 +54,6 @@ export default function Task({ task }: { task: tTask }) {
           </div>
         </TableBodyRowItem>
       </TableBodyRow>
-      {/* <TableBodyRow>
-        <TableBodyRowItem>
-          <Table>
-            <TableBody>
-              <TableBodyRow>
-                <TableBodyRowItem></TableBodyRowItem>
-              </TableBodyRow>
-            </TableBody>
-          </Table>
-        </TableBodyRowItem>
-      </TableBodyRow> */}
       {task.subtasks.length > 0 && (
         <TableBodyRow>
           <TableBodyRowItem stretch>

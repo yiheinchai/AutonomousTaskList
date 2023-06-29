@@ -1,9 +1,7 @@
 export default function Table({ children }: { children: React.ReactNode }) {
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5">
-      <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
-        {children}
-      </table>
+    <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+      <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">{children}</table>
     </div>
   );
 }
