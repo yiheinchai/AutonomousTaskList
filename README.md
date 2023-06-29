@@ -1,5 +1,9 @@
 # AutonomousTaskList
 
+## Planning
+
+[Whiteboard](https://www.tldraw.com/r/_mqRI0FERq0zEfTQJ8lmn?viewport=0%2C0%2C674%2C779&page=page%3AIBQXX67SL9_7SKvYSfvH-)
+
 ## Insipiration
 
 - This is a side project of the AutonomousLLM project.
