@@ -20,6 +20,15 @@
 - This tool will be mainly backend API focused given that the user can vary from humans, to many different types of AI agents, a seperate client can be created for each of those users.
 - As I am a human, I am prioritising building a web-based client and a VisonOS based client.
 
+## Evolutionary mechanisms
+
+- We give each AutonomousLLM agent a set number of money to begin with
+- The Autonomous agents will autonomously improve itself, and requires some money to do so.
+- Tasks are then put out to the auto-task marketplace where autonomous agents can choose to accept the task and receive compensation if successful.
+- However, doing the tasks requires some money too.
+- Eventually, the non-productive Autonomous agents will die out and only the productive ones will remain on the marketplace.
+- Eventually, the autonomous agents will become more and mroe productive.
+
 # Real world to-do list
 
 ## Inspiration
