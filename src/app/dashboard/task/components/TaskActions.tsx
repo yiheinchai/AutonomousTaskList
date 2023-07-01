@@ -37,31 +37,31 @@ export default function TaskActions({ task }: { task: tTask }) {
   };
 
   return (
-    <FlexEnd>
-      <ButtonGroup>
-        <FormButtonInput
-          action={handleAdd}
-          inputFields={[
-            { name: "name", placeholder: "Enter new task name", ariaLabel: "Enter new task name" },
-          ]}
-          metadata={{ parentId: task.id }}
-        >
-          Add
-        </FormButtonInput>
-        <Button>Auto add</Button>
-        <FormButtonInput
-          action={handleUpdate}
-          inputFields={[
-            { name: "name", placeholder: "Enter new task name", ariaLabel: "Enter new task name" },
-          ]}
-          metadata={{ taskId: task.id }}
-        >
-          Edit
-        </FormButtonInput>
-        <FormButton metadata={{ taskId: task.id }} action={handleDelete}>
-          Delete
-        </FormButton>
-      </ButtonGroup>
-    </FlexEnd>
+    // <FlexEnd>
+    <ButtonGroup>
+      <FormButtonInput
+        action={handleAdd}
+        inputFields={[
+          { name: "name", placeholder: "Enter new task name", ariaLabel: "Enter new task name" },
+        ]}
+        metadata={{ parentId: task.id }}
+      >
+        Add
+      </FormButtonInput>
+      <Button>Auto add</Button>
+      <FormButtonInput
+        action={handleUpdate}
+        inputFields={[
+          { name: "name", placeholder: "Enter new task name", ariaLabel: "Enter new task name" },
+        ]}
+        metadata={{ taskId: task.id }}
+      >
+        Edit
+      </FormButtonInput>
+      <FormButton metadata={{ taskId: task.id }} action={handleDelete}>
+        Delete
+      </FormButton>
+    </ButtonGroup>
+    // </FlexEnd>
   );
 }
