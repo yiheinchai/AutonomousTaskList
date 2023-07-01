@@ -22,3 +22,28 @@ export async function addDbSubtask(parentId: number, taskName: string) {
   revalidatePath("/dashboard/task");
   return createdTask;
 }
+
+export async function deleteDbTask(id: number) {
+  const deletedTask = await prisma.task.delete({
+    where: {
+      id,
+    },
+  });
+
+  revalidatePath("/dashboard/task");
+  return deletedTask;
+}
+
+export async function updateDbTask(id: number, newName: string) {
+  const updatedTask = await prisma.task.update({
+    where: {
+      id,
+    },
+    data: {
+      name: newName,
+    },
+  });
+
+  revalidatePath("/dashboard/task");
+  return updatedTask;
+}
