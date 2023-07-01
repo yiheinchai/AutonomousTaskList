@@ -8,14 +8,14 @@ import { executeGPTTask, generateGPTSubtasks } from "../db/methods";
 export default function TaskActions({ task }: { task: tTask }) {
   const handleDelete = async (formData: FormData) => {
     "use server";
-    const taskId = Number(formData.get("taskId"));
+    const taskId = String(formData.get("taskId"));
     if (!taskId) return;
     await deleteDbTask(taskId);
   };
 
   const handleUpdate = async (formData: FormData) => {
     "use server";
-    const taskId = Number(formData.get("taskId"));
+    const taskId = String(formData.get("taskId"));
     const edittedTaskName = String(formData.get("name"));
 
     if (!taskId || !edittedTaskName) return;
@@ -26,7 +26,7 @@ export default function TaskActions({ task }: { task: tTask }) {
   const handleAdd = async (formData: FormData) => {
     "use server";
     const taskName = String(formData.get("name"));
-    const parentId = Number(formData.get("parentId"));
+    const parentId = String(formData.get("parentId"));
 
     if (!taskName || !parentId) return;
     await addDbSubtask(parentId, taskName);

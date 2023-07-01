@@ -1,7 +1,7 @@
 import { tDbTask, tTask } from "../lib/types";
 
 export function convertDbTaskToTask(tasks: tDbTask[]): tTask[] {
-  const taskMap: Record<number, tTask> = {};
+  const taskMap: Record<string, tTask> = {};
   const rootTasks: tTask[] = [];
 
   // Create a map of tasks using their IDs as keys
@@ -34,7 +34,7 @@ export function convertDbTaskToTask(tasks: tDbTask[]): tTask[] {
   return rootTasks;
 }
 
-export function convertTaskToDbTask(task: tTask, parentId: number): tDbTask[] {
+export function convertTaskToDbTask(task: tTask, parentId: string): tDbTask[] {
   const dbTask: tDbTask = {
     name: task.name,
     id: task.id,

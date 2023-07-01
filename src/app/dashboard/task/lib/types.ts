@@ -6,14 +6,14 @@ export enum Status {
 }
 
 export interface tDbTask {
-  id: number;
+  id: string;
   name: string;
   assignee: string;
   status?: Status;
   description: string | null;
   chat_history?: tOpenaiMessage[];
   execution_result: string | null;
-  parentId: number | null;
+  parentId: string | null;
 }
 
 export interface tTask extends tDbTask {

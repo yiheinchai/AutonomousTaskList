@@ -15,7 +15,7 @@ export async function getDbTasks(): Promise<tDbTask[]> {
   return tasks;
 }
 
-export async function addDbSubtask(parentId: number, taskName: string) {
+export async function addDbSubtask(parentId: string, taskName: string) {
   const createdTask = await prisma.task.create({
     data: {
       parentId,
@@ -41,7 +41,7 @@ export async function addManyDbTask(tasks: tTaskCreationForm[]) {
   return createdTasks;
 }
 
-export async function deleteDbTask(id: number) {
+export async function deleteDbTask(id: string) {
   const deletedSubtasks = await prisma.task.deleteMany({
     where: {
       parentId: id,
