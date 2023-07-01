@@ -5,6 +5,12 @@ import { tTask } from "../lib/types";
 import Chip from "@/app/components/Chip";
 import TaskActions from "./TaskActions";
 
+const STATUS_COLORS = {
+  TODO: "sky",
+  IN_PROGRESS: "violet",
+  DONE: "emerald",
+};
+
 export default function Task({ task }: { task: tTask }) {
   return (
     <>
@@ -20,7 +26,7 @@ export default function Task({ task }: { task: tTask }) {
           </div>
         </TableBodyRowItem>
         <TableBodyRowItem widthPercentage={15}>
-          <Chip name={task.status} />
+          <Chip name={task.status || "TODO"} color={STATUS_COLORS[task.status || "TODO"]} />
         </TableBodyRowItem>
         <TableBodyRowItem widthPercentage={15}>{task.assignee}</TableBodyRowItem>
         {/* <TableBodyRowItem widthPercentage={45}>

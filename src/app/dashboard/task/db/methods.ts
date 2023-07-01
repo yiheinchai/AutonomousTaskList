@@ -1,6 +1,6 @@
 import { addManyDbTask, getDbTasks, updateDbTask } from "@/utils/database";
 import { convertDbTaskToTask } from "../utils/utils";
-import { tOpenaiMessage, tTask, tTaskCreationForm } from "../lib/types";
+import { Status, tOpenaiMessage, tTask, tTaskCreationForm } from "../lib/types";
 import { call_gpt } from "@/external_api/openai";
 
 export async function getTasks() {
@@ -33,7 +33,7 @@ export async function executeGPTTask(task: tTask) {
   const updatedTask = await updateDbTask({
     id: task.id,
     execution_result: response,
-    status: "DONE",
+    status: "DONE" as Status,
   });
 
   return updatedTask;
