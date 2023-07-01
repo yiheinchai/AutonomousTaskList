@@ -34,6 +34,7 @@ export async function executeGPTTask(task: tTask) {
     id: task.id,
     execution_result: response,
     status: "DONE" as Status,
+    chat_history: newChatHistory as tOpenaiMessage[],
   });
 
   return updatedTask;
