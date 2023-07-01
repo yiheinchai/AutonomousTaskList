@@ -1,13 +1,7 @@
 // PRISMADB
 
-import { PrismaClient, Status } from "@prisma/client";
-import {
-  tDbTask,
-  tOpenaiMessage,
-  tTask,
-  tTaskCreationForm,
-  tTaskUpdateForm,
-} from "../app/dashboard/task/lib/types";
+import { PrismaClient } from "@prisma/client";
+import { tDbTask, tTaskCreationForm, tTaskUpdateForm } from "../app/dashboard/task/lib/types";
 import { revalidatePath } from "next/cache";
 
 export const prisma = new PrismaClient();
