@@ -8,6 +8,7 @@ import ButtonNewTask from "./ButtonNewTask";
 import FormNewTask from "./FormNewTask";
 import FormButton from "@/app/components/FormButton";
 import FormButtonInput from "@/app/components/FormButtonInput";
+import { generateGPTSubtasks } from "../db/methods";
 
 export default function TaskActions({ task }: { task: tTask }) {
   const handleDelete = async (formData: FormData) => {
@@ -36,8 +37,13 @@ export default function TaskActions({ task }: { task: tTask }) {
     await addDbSubtask(parentId, taskName);
   };
 
+  const handleAutoAdd = async () => {
+    "use server";
+    console.log("activating autoadd");
+    await generateGPTSubtasks(task);
+  };
+
   return (
-    // <FlexEnd>
     <ButtonGroup>
       <FormButtonInput
         action={handleAdd}
@@ -48,11 +54,16 @@ export default function TaskActions({ task }: { task: tTask }) {
       >
         Add
       </FormButtonInput>
-      <Button>Auto add</Button>
+      <FormButton action={handleAutoAdd}>Auto add</FormButton>
       <FormButtonInput
         action={handleUpdate}
         inputFields={[
-          { name: "name", placeholder: "Enter new task name", ariaLabel: "Enter new task name" },
+          {
+            name: "name",
+            placeholder: "Enter new task name",
+            ariaLabel: "Enter new task name",
+            defaultValue: task.name,
+          },
         ]}
         metadata={{ taskId: task.id }}
       >
@@ -62,6 +73,5 @@ export default function TaskActions({ task }: { task: tTask }) {
         Delete
       </FormButton>
     </ButtonGroup>
-    // </FlexEnd>
   );
 }

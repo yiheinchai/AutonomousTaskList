@@ -15,7 +15,7 @@ export default function FormButtonInput({
       <Button>{children}</Button>
       <div className="relative">
         <form
-          className="invisible absolute group-hover/input:visible hover:delay-300 pt-2 -ml-20"
+          className="invisible absolute group-hover/input:visible hover:delay-300 pt-2"
           action={action}
         >
           <div className="flex flex-col p-1.5 overflow-hidden border rounded-lg bg-white dark:bg-gray-900 dark:border-gray-600 lg:flex-col dark:focus-within:border-blue-300 focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
