@@ -1,7 +1,7 @@
 import { addManyDbTask, getDbTasks, updateDbTask } from "@/utils/database";
 import { convertDbTaskToTask } from "../utils/utils";
 import { Status, tOpenaiMessage, tTask, tTaskCreationForm } from "../lib/types";
-import { call_gpt } from "@/external_api/openai";
+import { OPENAI_MODEL, call_gpt } from "@/external_api/openai";
 
 export async function getTasks() {
   const tasks = await getDbTasks();
@@ -34,6 +34,7 @@ export async function executeGPTTask(task: tTask) {
     id: task.id,
     execution_result: response,
     status: "DONE" as Status,
+    assignee: OPENAI_MODEL,
     chat_history: newChatHistory as tOpenaiMessage[],
   });
 

@@ -1,4 +1,4 @@
-const message_history = [];
+export const OPENAI_MODEL = "gpt-3.5-turbo";
 
 export async function call_gpt(message: string) {
   const myHeaders = new Headers();
@@ -8,7 +8,7 @@ export async function call_gpt(message: string) {
 
   console.log("calling gpt function...");
   const raw = JSON.stringify({
-    model: "gpt-3.5-turbo",
+    model: OPENAI_MODEL,
     messages: [
       {
         role: "user",
