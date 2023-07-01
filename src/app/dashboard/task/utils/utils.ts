@@ -10,9 +10,13 @@ export function convertDbTaskToTask(tasks: tDbTask[]): tTask[] {
     taskMap[task.id] = {
       name: task.name,
       id: task.id,
+      parentId: task.parentId,
       assignee: task.assignee,
       status: task.status,
       subtasks: [],
+      description: task.description,
+      chat_history: task.chat_history,
+      execution_result: task.execution_result,
     };
   });
 
@@ -38,6 +42,9 @@ export function convertTaskToDbTask(task: tTask, parentId: number): tDbTask[] {
     assignee: task.assignee,
     status: task.status,
     parentId: parentId, // Set parentId initially to null
+    description: task.description,
+    chat_history: task.chat_history,
+    execution_result: task.execution_result,
   };
 
   let subtasks: tDbTask[] = [];

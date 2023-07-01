@@ -8,7 +8,7 @@ import ButtonNewTask from "./ButtonNewTask";
 import FormNewTask from "./FormNewTask";
 import FormButton from "@/app/components/FormButton";
 import FormButtonInput from "@/app/components/FormButtonInput";
-import { generateGPTSubtasks } from "../db/methods";
+import { executeGPTTask, generateGPTSubtasks } from "../db/methods";
 
 export default function TaskActions({ task }: { task: tTask }) {
   const handleDelete = async (formData: FormData) => {
@@ -25,7 +25,7 @@ export default function TaskActions({ task }: { task: tTask }) {
 
     if (!taskId || !edittedTaskName) return;
 
-    await updateDbTask(taskId, edittedTaskName);
+    await updateDbTask({ id: taskId, name: edittedTaskName });
   };
 
   const handleAdd = async (formData: FormData) => {
@@ -41,6 +41,11 @@ export default function TaskActions({ task }: { task: tTask }) {
     "use server";
     console.log("activating autoadd");
     await generateGPTSubtasks(task);
+  };
+
+  const handleExecute = async () => {
+    "use server";
+    await executeGPTTask(task);
   };
 
   return (
@@ -69,6 +74,7 @@ export default function TaskActions({ task }: { task: tTask }) {
       >
         Edit
       </FormButtonInput>
+      <FormButton action={handleExecute}>Execute</FormButton>
       <FormButton metadata={{ taskId: task.id }} action={handleDelete}>
         Delete
       </FormButton>

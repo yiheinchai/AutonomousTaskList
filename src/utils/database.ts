@@ -1,17 +1,23 @@
 // PRISMADB
 
-import { PrismaClient } from "@prisma/client";
-import { tDbTask, tTask } from "../app/dashboard/task/lib/types";
+import { PrismaClient, Status } from "@prisma/client";
+import {
+  tDbTask,
+  tOpenaiMessage,
+  tTask,
+  tTaskCreationForm,
+  tTaskUpdateForm,
+} from "../app/dashboard/task/lib/types";
 import { revalidatePath } from "next/cache";
 
 export const prisma = new PrismaClient();
 
 export async function getDbTasks(): Promise<tDbTask[]> {
-  const tasks = await prisma.task.findMany({
+  const tasks = (await prisma.task.findMany({
     orderBy: {
-      createdAt: "asc",
+      id: "asc",
     },
-  });
+  })) as unknown as tDbTask[];
   return tasks;
 }
 
@@ -27,12 +33,15 @@ export async function addDbSubtask(parentId: number, taskName: string) {
   return createdTask;
 }
 
-export async function addManyDbTask(parentId: number, taskNames: string[]) {
+export async function addManyDbTask(tasks: tTaskCreationForm[]) {
   const createdTasks = await prisma.task.createMany({
-    data: taskNames.map((taskName) => ({
-      parentId,
-      name: taskName,
-    })),
+    data: tasks.map((task) => {
+      return {
+        parentId: task.parentId,
+        name: task.name,
+        chat_history: task.chat_history,
+      };
+    }),
   });
   revalidatePath("/dashboard/task");
   return createdTasks;
@@ -58,13 +67,15 @@ export async function deleteDbTask(id: number) {
   return deletedTask;
 }
 
-export async function updateDbTask(id: number, newName: string) {
+export async function updateDbTask({ id, ...newValues }: tTaskUpdateForm) {
+  // if (newValues.status && Object.entries(Status).includes(newValues.status)) {
   const updatedTask = await prisma.task.update({
     where: {
       id,
     },
     data: {
-      name: newName,
+      ...(newValues as any),
+      // TODO: Fix poor typing conventions
     },
   });
 
