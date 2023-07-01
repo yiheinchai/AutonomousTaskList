@@ -16,12 +16,14 @@ export default function Task({ task }: { task: tTask }) {
   return (
     <>
       <TableBodyRow>
-        <TableBodyRowItem>{task.name}</TableBodyRowItem>
-        <TableBodyRowItem>
+        <TableBodyRowItem widthPercentage={30} isText>
+          {task.name}
+        </TableBodyRowItem>
+        <TableBodyRowItem widthPercentage={15}>
           <Chip name={task.status} />
         </TableBodyRowItem>
-        <TableBodyRowItem>{task.assignee}</TableBodyRowItem>
-        <TableBodyRowItem>
+        <TableBodyRowItem widthPercentage={15}>{task.assignee}</TableBodyRowItem>
+        <TableBodyRowItem widthPercentage={45}>
           <TaskActions task={task} />
         </TableBodyRowItem>
       </TableBodyRow>
