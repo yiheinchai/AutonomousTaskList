@@ -1,7 +1,6 @@
+import { convertDbTaskToTask } from "@/app/dashboard/task/utils/utils";
 import { addDbSubtask, getDbTasks } from "@/utils/database";
-import { convertDbTaskToTask } from "../utils/utils";
 import { NextRequest, NextResponse } from "next/server";
-import { tDbTask } from "../lib/types";
 
 export const revalidate = 60;
 
