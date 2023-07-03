@@ -1,3 +1,5 @@
+import { remark } from "remark";
+import html from "remark-html";
 import { tDbTask, tTask } from "../lib/types";
 
 export function convertDbTaskToTask(tasks: tDbTask[]): tTask[] {
@@ -57,4 +59,8 @@ export function convertTaskToDbTask(task: tTask, parentId: string): tDbTask[] {
   }
 
   return [dbTask, ...subtasks];
+}
+
+export async function convertStringToMdHTML(contentString: string) {
+  return await remark().use(html).process(contentString);
 }

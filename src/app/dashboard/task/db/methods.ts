@@ -1,4 +1,4 @@
-import { addManyDbTask, getDbTasks, updateDbTask } from "@/utils/database";
+import { addManyDbTask, getDbTask, getDbTasks, updateDbTask } from "@/utils/database";
 import { convertDbTaskToTask } from "../utils/utils";
 import { Status, tOpenaiMessage, tTask, tTaskCreationForm } from "../lib/types";
 import { OPENAI_MODEL, call_gpt } from "@/external_api/openai";
@@ -7,6 +7,12 @@ export async function getTasks() {
   const tasks = await getDbTasks();
   const hierarchicalTasks = convertDbTaskToTask(tasks);
   return hierarchicalTasks;
+}
+
+export async function getTask(id: string) {
+  const tasks = await getDbTask(id);
+  const hierarchicalTask = convertDbTaskToTask(tasks);
+  return hierarchicalTask[0];
 }
 
 function extractListItems(text: string) {

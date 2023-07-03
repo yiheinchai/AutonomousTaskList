@@ -25,7 +25,7 @@ export default function FormButtonInput({
                   <input
                     type="text"
                     className="px-6 py-2 text-gray-700 dark:text-gray-300 placeholder-gray-500 bg-white outline-none dark:bg-gray-800 dark:placeholder-gray-400 focus:placeholder-transparent dark:focus:placeholder-transparent"
-                    key={index}
+                    key={Object.values(props).join("")}
                     {...props}
                   ></input>
                 );

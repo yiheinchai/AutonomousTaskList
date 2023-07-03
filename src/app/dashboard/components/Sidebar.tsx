@@ -1,13 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Sidebar() {
   return (
     <aside className="flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
-      <a href="#">
+      <Link href="/dashboard/task">
         <span className="mx-4 text-xl text-gray-700 rounded-md dark:text-gray-200 font-semibold">
           AutoTask
         </span>
-      </a>
+      </Link>
 
       <div className="relative mt-6">
         <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -31,9 +32,9 @@ export default function Sidebar() {
 
       <div className="flex flex-col justify-between flex-1 mt-6">
         <nav>
-          <a
+          <Link
             className="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md dark:bg-gray-800 dark:text-gray-200"
-            href="#"
+            href="/dashboard/task"
           >
             <svg
               className="w-5 h-5"
@@ -51,7 +52,7 @@ export default function Sidebar() {
             </svg>
 
             <span className="mx-4 font-medium">Tasks</span>
-          </a>
+          </Link>
 
           <a
             className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"

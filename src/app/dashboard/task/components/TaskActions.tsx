@@ -61,7 +61,7 @@ export default function TaskActions({ task }: { task: tTask }) {
           {
             name: "name",
             placeholder: "Enter new task name",
-            ariaLabel: "Enter new task name",
+            "aria-label": "Enter new task name",
             defaultValue: task.name,
           },
         ]}

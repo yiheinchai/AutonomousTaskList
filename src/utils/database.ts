@@ -9,10 +9,25 @@ export const prisma = new PrismaClient();
 export async function getDbTasks(): Promise<tDbTask[]> {
   const tasks = (await prisma.task.findMany({
     orderBy: {
-      id: "asc",
+      createdAt: "asc",
     },
   })) as unknown as tDbTask[];
   return tasks;
+}
+
+export async function getDbTask(id: string): Promise<tDbTask[]> {
+  const task = await prisma.task.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  const subtasks = await prisma.task.findMany({
+    where: {
+      parentId: id,
+    },
+  });
+  return [task, ...subtasks] as unknown as tDbTask[];
 }
 
 export async function addDbSubtask(parentId: string, taskName: string) {

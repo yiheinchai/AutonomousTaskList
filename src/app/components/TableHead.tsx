@@ -8,7 +8,7 @@ export default function TableHead({ columns }: { columns: string[] }) {
           return (
             <th
               scope="col"
-              key={index}
+              key={columnName}
               className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
             >
               {columnName}

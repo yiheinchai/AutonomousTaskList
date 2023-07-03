@@ -4,12 +4,8 @@ import TaskList from "./TaskList";
 import { tTask } from "../lib/types";
 import Chip from "@/app/components/Chip";
 import TaskActions from "./TaskActions";
-
-const STATUS_COLORS = {
-  TODO: "sky",
-  IN_PROGRESS: "violet",
-  DONE: "emerald",
-};
+import Link from "next/link";
+import { STATUS_COLORS } from "../lib/consts";
 
 export default function Task({ task }: { task: tTask }) {
   return (
@@ -17,7 +13,11 @@ export default function Task({ task }: { task: tTask }) {
       <TableBodyRow>
         <TableBodyRowItem widthPercentage={70}>
           <div className="group/task overflow-visible">
-            <div className="truncate">{task.name}</div>
+            <div className="truncate">
+              <Link href={`/dashboard/task/${task.id}`} passHref>
+                {task.name}
+              </Link>
+            </div>
             <div className="relative">
               <div className="invisible absolute group-hover/task:visible hover:delay-300 pt-2 text-inherit">
                 <TaskActions task={task} />
