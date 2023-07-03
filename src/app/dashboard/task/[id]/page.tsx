@@ -29,7 +29,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
 
           <div>
-            <h1 className="mt-2 text-lg font-semibold text-gray-800 dark:text-white">
+            <h1 className="mt-2 text-xl font-semibold text-gray-800 dark:text-white">
               {task.name}
             </h1>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{task.description}</p>
@@ -44,14 +44,16 @@ export default async function Page({ params }: { params: { id: string } }) {
 
         <div className="px-5 py-4">
           <div className="p-3 bg-gray-100 rounded-lg dark:bg-gray-800">
-            <h2 className="text-sm font-medium text-gray-800 dark:text-white">Execution Result</h2>
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            <h2 className="text-base font-medium text-gray-800 dark:text-white">
+              Execution Result
+            </h2>
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
               {task.execution_result || "Not executed yet"}
             </p>
           </div>
           {/* Content */}
           <div className="mt-4 p-3 bg-gray-100 rounded-lg dark:bg-gray-800">
-            <h2 className="text-sm font-medium text-gray-800 dark:text-white">Activity</h2>
+            <h2 className="text-base font-medium text-gray-800 dark:text-white">Activity</h2>
             <ul className="mt-4 space-y-5">
               {task.chat_history != null &&
                 task.chat_history.map(async (chat, index) => {
