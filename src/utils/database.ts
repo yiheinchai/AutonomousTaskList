@@ -1,19 +1,93 @@
 // PRISMADB
 
 import { PrismaClient } from "@prisma/client";
-import { tTask } from "../app/dashboard/task/lib/types";
+import { tDbTask, tTaskCreationForm, tTaskUpdateForm } from "../app/dashboard/task/lib/types";
+import { revalidatePath } from "next/cache";
 
 export const prisma = new PrismaClient();
 
-export async function getTasks() {
-  return prisma.task.findMany();
+export async function getDbTasks(): Promise<tDbTask[]> {
+  const tasks = (await prisma.task.findMany({
+    orderBy: {
+      createdAt: "asc",
+    },
+  })) as unknown as tDbTask[];
+  return tasks;
 }
 
-export async function addDBSubtask(parentTask: tTask, taskName: string) {
-  return prisma.task.create({
+export async function getDbTask(id: string): Promise<tDbTask[]> {
+  const task = await prisma.task.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  const subtasks = await prisma.task.findMany({
+    where: {
+      parentId: id,
+    },
+  });
+  return [task, ...subtasks] as unknown as tDbTask[];
+}
+
+export async function addDbSubtask(parentId: string, taskName: string) {
+  const createdTask = await prisma.task.create({
     data: {
-      parentId: parentTask.id,
+      parentId,
       name: taskName,
     },
   });
+
+  revalidatePath("/dashboard/task");
+  return createdTask;
+}
+
+export async function addManyDbTask(tasks: tTaskCreationForm[]) {
+  const createdTasks = await prisma.task.createMany({
+    data: tasks.map((task) => {
+      return {
+        parentId: task.parentId,
+        name: task.name,
+        chat_history: task.chat_history,
+      };
+    }),
+  });
+  revalidatePath("/dashboard/task");
+  return createdTasks;
+}
+
+export async function deleteDbTask(id: string) {
+  const deletedSubtasks = await prisma.task.deleteMany({
+    where: {
+      parentId: id,
+    },
+  });
+  console.log("deleted subtasks", deletedSubtasks);
+
+  const deletedTask = await prisma.task.delete({
+    where: {
+      id,
+    },
+  });
+
+  console.log("deleted task", deletedTask);
+
+  revalidatePath("/dashboard/task");
+  return deletedTask;
+}
+
+export async function updateDbTask({ id, ...newValues }: tTaskUpdateForm) {
+  // if (newValues.status && Object.entries(Status).includes(newValues.status)) {
+  const updatedTask = await prisma.task.update({
+    where: {
+      id,
+    },
+    data: {
+      ...(newValues as any),
+      // TODO: Fix poor typing conventions
+    },
+  });
+
+  revalidatePath("/dashboard/task");
+  return updatedTask;
 }

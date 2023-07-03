@@ -11,11 +11,22 @@ datasource db {
 }
 
 model Task {
-  id          Int      @id @default(autoincrement())
-  name        String
-  parentId    Int?
-  parentTask  Task?    @relation("Subtasks", fields: [parentId], references: [id])
-  subtasks    Task[]   @relation("Subtasks") // Add the opposite relation field
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id               String   @id @default(uuid())
+  name             String
+  status           Status   @default(TODO)
+  description      String?
+  chat_history     Json?
+  execution_result String?
+  assignee         String   @default("Unassigned")
+  parentId         String?
+  parentTask       Task?    @relation("Subtasks", fields: [parentId], references: [id])
+  subtasks         Task[]   @relation("Subtasks") // Add the opposite relation field
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+enum Status {
+  TODO
+  IN_PROGRESS
+  DONE
 }

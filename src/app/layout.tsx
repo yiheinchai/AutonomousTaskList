@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900`}
+        className={`${inter.className} bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 overflow-hidden`}
       >
         {children}
       </body>

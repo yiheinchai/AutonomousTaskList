@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default async function Home() {
   return (
-    <div className="relative overflow-hidden">
+    <div className="overflow-hidden">
       <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
         {/* Announcement Banner */}
         <div className="flex justify-center">
