@@ -20,8 +20,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <div className="m-3">
       <div className="w-full px-2 bg-white dark:bg-gray-800">
-        <div className="z-100 sticky top-0 bg-white px-5 pt-8 pb-1">
-          <div className="bg-white flex items-center justify-between">
+        <div className="z-100 sticky top-0 bg-white dark:bg-gray-800 px-5 pt-8 pb-1">
+          <div className="flex items-center justify-between">
             <span className="text-sm font-light text-gray-800 dark:text-gray-400">
               {task.assignee}
             </span>
@@ -43,16 +43,16 @@ export default async function Page({ params }: { params: { id: string } }) {
         )}
 
         <div className="px-5 py-4">
-          <div className="p-3 bg-gray-100 rounded-lg dark:bg-gray-800">
+          <div className="p-4 bg-gray-100 rounded-lg dark:bg-gray-700">
             <h2 className="text-base font-medium text-gray-800 dark:text-white">
               Execution Result
             </h2>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
               {task.execution_result || "Not executed yet"}
             </p>
           </div>
           {/* Content */}
-          <div className="mt-4 p-3 bg-gray-100 rounded-lg dark:bg-gray-800">
+          <div className="mt-4 p-4 bg-gray-100 rounded-lg dark:bg-gray-700">
             <h2 className="text-base font-medium text-gray-800 dark:text-white">Activity</h2>
             <ul className="mt-4 space-y-5">
               {task.chat_history != null &&

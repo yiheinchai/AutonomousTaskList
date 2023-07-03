@@ -1,6 +1,6 @@
 export default function ChatFooter() {
   return (
-    <footer className=" mx-auto bg-white border-t border-gray-200 pt-2 mt-4 pb-4 sm:pt-4 sm:pb-6 sm:px-6 lg:px-0 dark:bg-slate-900 dark:border-gray-700">
+    <footer className="mx-auto bg-white border-t border-gray-200 pt-2 mt-4 pb-4 sm:pt-4 sm:pb-6 sm:px-6 lg:px-3 rounded-lg dark:bg-slate-900 dark:border-gray-700">
       <div className="flex justify-between items-center mb-3">
         <button
           type="button"
