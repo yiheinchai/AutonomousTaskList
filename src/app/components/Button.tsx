@@ -6,14 +6,14 @@ export default function Button({
   ...props
 }: {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: any) => void;
 }) {
   return (
     <button
       {...props}
-      onClick={() => {
+      onClick={(e: any) => {
         if (onClick) {
-          onClick();
+          onClick(e);
         }
       }}
       className="px-4 py-2 font-medium text-gray-600 transition-colors duration-200 sm:px-6 dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100"

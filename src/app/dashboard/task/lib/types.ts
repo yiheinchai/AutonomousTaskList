@@ -1,4 +1,15 @@
 export type tOpenaiMessage = { role: "system" | "user"; content: string };
+export interface OpenAIStreamPayload {
+  model: string;
+  messages: tOpenaiMessage[];
+  temperature: number;
+  top_p: number;
+  frequency_penalty: number;
+  presence_penalty: number;
+  stream: boolean;
+  n: number;
+}
+
 export enum Status {
   TODO = "TODO",
   IN_PROGRESS = "IN_PROGRESS",

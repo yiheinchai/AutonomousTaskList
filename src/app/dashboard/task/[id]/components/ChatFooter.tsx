@@ -1,4 +1,53 @@
-export default function ChatFooter() {
+"use client";
+
+import { Dispatch, SetStateAction, useState } from "react";
+import { tOpenaiMessage } from "../../lib/types";
+import { ParsedEvent, ReconnectInterval, createParser } from "eventsource-parser";
+
+export default function ChatFooter({ sendMessage }: { sendMessage: (message: string) => void }) {
+  const [inputText, setInputText] = useState("");
+  const [aiOutput, setAIOutput] = useState("");
+
+  async function getCompletion(message: string) {
+    const response = await fetch("/api/completion", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt: message }),
+    });
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    // This data is a ReadableStream
+    const data = response.body;
+    if (!data) {
+      return;
+    }
+    const onParse = (event: ParsedEvent | ReconnectInterval) => {
+      if (event.type === "event") {
+        const data = event.data;
+        try {
+          const text: string = JSON.parse(data).text ?? "";
+          setAIOutput((prev) => prev + text);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    // https://web.dev/streams/#the-getreader-and-read-methods
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+    const parser = createParser(onParse);
+    let done = false;
+    while (!done) {
+      const { value, done: doneReading } = await reader.read();
+      done = doneReading;
+      const chunkValue = decoder.decode(value);
+      parser.feed(chunkValue);
+    }
+  }
+
   return (
     <footer className="mx-auto bg-white border-t border-gray-200 pt-2 mt-4 pb-4 sm:pt-4 sm:pb-6 sm:px-6 lg:px-3 rounded-lg dark:bg-slate-900 dark:border-gray-700">
       <div className="flex justify-between items-center mb-3">
@@ -43,14 +92,17 @@ export default function ChatFooter() {
       </div>
 
       {/* Input */}
-      <div className="relative">
+      <div>
         <textarea
+          onChange={(e) => setInputText(e.target.value)}
+          onSubmit={(e) => {}}
+          value={inputText}
           className="p-4 pb-12 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
           placeholder="Ask me anything..."
         ></textarea>
 
         {/* Toolbar */}
-        <div className="absolute bottom-px inset-x-px p-2 rounded-b-md bg-white dark:bg-slate-900">
+        <div className="bottom-px inset-x-px p-2 rounded-b-md bg-white dark:bg-slate-900">
           <div className="flex justify-between items-center">
             {/* Button Group */}
             <div className="flex items-center">
@@ -117,6 +169,10 @@ export default function ChatFooter() {
               {/* Send Button */}
               <button
                 type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  sendMessage(inputText);
+                }}
                 className="inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-md text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
               >
                 <svg
@@ -138,6 +194,7 @@ export default function ChatFooter() {
         {/* End Toolbar */}
       </div>
       {/* End Input */}
+      <div className="dark:text-gray-100">{aiOutput}</div>
     </footer>
   );
 }

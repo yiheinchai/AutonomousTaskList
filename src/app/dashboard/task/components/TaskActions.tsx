@@ -48,7 +48,7 @@ export default function TaskActions({ task }: { task: tTask }) {
       <FormButtonInput
         action={handleAdd}
         inputFields={[
-          { name: "name", placeholder: "Enter new task name", ariaLabel: "Enter new task name" },
+          { name: "name", placeholder: "Enter new task name", "aria-label": "Enter new task name" },
         ]}
         metadata={{ parentId: task.id }}
       >

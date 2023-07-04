@@ -6,9 +6,7 @@ export default function ChatBubbleUser({ content }: { content: string }) {
       <div className="grow text-end space-y-3">
         {/* {/* Card */}
         <div className="inline-block bg-blue-600 rounded-lg p-4 shadow-sm">
-          <p className="text-sm text-white">
-            <div dangerouslySetInnerHTML={{ __html: content }}></div>
-          </p>
+          <div className="text-sm text-white whitespace-pre-wrap">{content}</div>
         </div>
         {/* {/* End Card */}
       </div>
