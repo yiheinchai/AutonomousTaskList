@@ -4,6 +4,7 @@ import { STATUS_COLORS } from "../lib/consts";
 import TaskActionsInline from "./components/TaskActionsInline";
 import Chat from "./components/Chat";
 import TaskList from "../components/TaskList";
+import { convertChatHistoryToMd } from "./lib/utils";
 
 export async function generateStaticParams() {
   const tasks = await getTasks();
@@ -51,8 +52,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           <h2 className="text-base font-medium text-gray-800 dark:text-white">
             Final Execution Result
           </h2>
-          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            {task.execution_result || "Not executed yet"}
+          <p className="whitespace-pre-wrap mt-2 text-sm text-gray-500 dark:text-gray-400">
+            {task.execution_result}
           </p>
         </div>
         {/* Content */}
