@@ -4,14 +4,11 @@ import { NextRequest } from "next/server";
 export const runtime = "edge";
 
 export async function POST(req: NextRequest) {
-  console.log("completion called!");
   const reqBody = await req.json();
 
   if (reqBody.prompt == null) return;
 
   const stream = await call_gpt_with_stream(reqBody.prompt, reqBody?.chat_history);
-
-  console.log("stream started!");
 
   return new Response(stream, {
     headers: new Headers({
@@ -21,6 +18,7 @@ export async function POST(req: NextRequest) {
 
       // 'Content-Type': 'text/event-stream',
       "Cache-Control": "no-cache",
+      "Access-Control-Allow-Origin": "*",
     }),
   });
 }
