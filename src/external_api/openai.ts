@@ -134,7 +134,6 @@ export async function call_gpt_with_stream(
     top_p: 1,
     n: 1,
     stream: true,
-    max_tokens: 4000,
     presence_penalty: 0,
     frequency_penalty: 0,
   };

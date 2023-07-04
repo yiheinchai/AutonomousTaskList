@@ -27,7 +27,7 @@ export default function Chat({ task }: { task: tTask }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt: message }),
+      body: JSON.stringify({ prompt: message, chat_history: chatHistory }),
     });
     if (!response.ok) {
       throw new Error(response.statusText);
