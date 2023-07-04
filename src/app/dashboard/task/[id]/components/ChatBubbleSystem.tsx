@@ -9,9 +9,7 @@ export default function ChatBubbleSystem({ content }: { content: string }) {
 
       {/* Card */}
       <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-3 dark:bg-slate-900 dark:border-gray-700">
-        <p className="mb-1.5 text-sm text-gray-800 dark:text-white">
-          <div dangerouslySetInnerHTML={{ __html: content }}></div>
-        </p>
+        <div className="mb-1.5 text-sm text-gray-800 dark:text-white">{content}</div>
       </div>
       {/* End Card */}
     </li>

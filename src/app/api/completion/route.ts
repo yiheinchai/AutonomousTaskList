@@ -6,11 +6,14 @@ export const config = {
 };
 
 export async function POST(req: NextRequest) {
-  // const reqBody: tTask = await req.json();
+  console.log("completion called!");
+  const reqBody = await req.json();
 
-  // const updatedTask = await executeGPTTask(reqBody, true);
+  if (reqBody.prompt == null) return;
 
-  const stream = await call_gpt_with_stream("Give me a tutorial on NextJS");
+  const stream = await call_gpt_with_stream(reqBody.prompt, reqBody?.chat_history);
+
+  console.log("stream started!");
 
   return new Response(stream, {
     headers: new Headers({

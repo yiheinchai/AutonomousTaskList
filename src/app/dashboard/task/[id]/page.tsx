@@ -1,11 +1,9 @@
-import TaskList from "../components/TaskList";
 import { getTask, getTasks } from "../db/methods";
 import Chip from "@/app/components/Chip";
 import { STATUS_COLORS } from "../lib/consts";
-import ChatBubbleSystem from "./components/ChatBubbleSystem";
-import ChatBubbleUser from "./components/ChatBubbleUser";
-import { convertStringToMdHTML } from "../utils/utils";
-import ChatFooter from "./components/ChatFooter";
+import TaskActionsInline from "./components/TaskActionsInline";
+import Chat from "./components/Chat";
+import TaskList from "../components/TaskList";
 
 export async function generateStaticParams() {
   const tasks = await getTasks();
@@ -36,6 +34,15 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
         </div>
 
+        <div className="px-5 py-4">
+          <div className="p-4 bg-gray-100 rounded-lg dark:bg-gray-700">
+            <h2 className="text-base font-medium text-gray-800 dark:text-white">Actions</h2>
+            <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+              <TaskActionsInline task={task} />
+            </div>
+          </div>
+        </div>
+
         {task.subtasks.length > 0 && (
           <div className="px-5 py-4">
             <TaskList withHeader tasks={task.subtasks} />{" "}
@@ -45,31 +52,14 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className="px-5 py-4">
           <div className="p-4 bg-gray-100 rounded-lg dark:bg-gray-700">
             <h2 className="text-base font-medium text-gray-800 dark:text-white">
-              Execution Result
+              Final Execution Result
             </h2>
             <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
               {task.execution_result || "Not executed yet"}
             </p>
           </div>
           {/* Content */}
-          <div className="mt-4 p-4 bg-gray-100 rounded-lg dark:bg-gray-700">
-            <h2 className="text-base font-medium text-gray-800 dark:text-white">Activity</h2>
-            <ul className="mt-4 space-y-5">
-              {task.chat_history != null &&
-                task.chat_history.map(async (chat, index) => {
-                  const content = (await convertStringToMdHTML(chat.content)).toString();
-                  if (chat.role === "system") {
-                    return <ChatBubbleSystem key={chat.content.slice(0, 10)} content={content} />;
-                  }
-
-                  if (chat.role === "user") {
-                    return <ChatBubbleUser key={chat.content.slice(0, 10)} content={content} />;
-                  }
-                })}
-            </ul>
-          </div>
-
-          <ChatFooter />
+          <Chat task={task} />
         </div>
       </div>
     </div>

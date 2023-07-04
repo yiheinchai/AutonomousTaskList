@@ -27,9 +27,9 @@ function extractListItems(text: string) {
   return [];
 }
 
-export async function executeGPTTask(task: tTask) {
+export async function executeGPTTask(task: tTask, stream: boolean = false) {
   const prompt = `Task: ${task.name}`;
-  const response = await call_gpt(prompt);
+  const response = await call_gpt(prompt, stream);
   const newChatHistory = [
     ...(task.chat_history || []),
     { role: "user", content: prompt },
@@ -47,13 +47,13 @@ export async function executeGPTTask(task: tTask) {
   return updatedTask;
 }
 
-export async function generateGPTSubtasks(task: tTask) {
+export async function generateGPTSubtasks(task: tTask, stream: boolean = false) {
   const prompt = `Task: ${task.name}
   Description: ${task.description}
   
   What are the steps that needs to be taken?
   `;
-  const response = await call_gpt(prompt);
+  const response = await call_gpt(prompt, stream);
   const newChatHistory = [
     ...(task.chat_history || []),
     { role: "user", content: prompt },
