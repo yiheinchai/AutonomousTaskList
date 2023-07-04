@@ -1,9 +1,7 @@
 import { call_gpt_with_stream } from "@/external_api/openai";
 import { NextRequest } from "next/server";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 export async function POST(req: NextRequest) {
   // const reqBody: tTask = await req.json();
