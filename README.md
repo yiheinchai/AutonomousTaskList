@@ -1,4 +1,4 @@
-# AutonomousTaskList
+# AutoTask
 
 ## Planning
 
@@ -6,7 +6,7 @@
 
 ## Insipiration
 
-- This is a side project of the AutonomousLLM project.
+- This is a side project of the AutoAgent project.
 - This aims to provide a backend first GPT-powered task generation app. It was noticed when building AutonomousLLM that it had difficulty handling tasks and breaking them down into smaller tasks before attempting them.
 - This project provides an API for AutonomousLLM to manage its tasks.
 
